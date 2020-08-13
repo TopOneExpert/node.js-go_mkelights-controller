@@ -1,0 +1,40 @@
+
+
+Options +SymLinksIfOwnerMatch
+RewriteEngine on
+#RewriteCond %{REMOTE_ADDR} !^00.00.00.00
+#RewriteCond %{REMOTE_ADDR} !^109.93.248.161
+
+#RewriteCond %{REQUEST_URI} !/construction.html$ [NC]
+#RewriteRule (.*) /construction.html [R=302,L]
+
+ErrorDocument 400 /index.php
+ErrorDocument 401 /index.php
+ErrorDocument 403 /index.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteCond %{HTTP_HOST} ^mkelights\.co$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.mkelights\.co$
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^/?$ "http\:\/\/www\.mkelights\.com" [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^([^/]+)/?$ index.php?page=$1 [L]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^mkelights\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.mkelights\.com$
+RewriteRule ^/?$ "https\:\/\/www\.mkelights\.com\/" [R=301,L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php72” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php72 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
