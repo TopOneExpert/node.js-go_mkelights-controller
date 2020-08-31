@@ -12,7 +12,11 @@ import (
 
 func main() {
 
-    var arg string = os.Args[1]
+    var arg string = "01"
+
+    if len(os.Args) > 1 {
+        arg = os.Args[1]
+    }
 
     channel, err := strconv.ParseInt(arg, 10, 8)
 
