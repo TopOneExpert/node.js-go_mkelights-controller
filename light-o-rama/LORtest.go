@@ -6,14 +6,24 @@ import (
 	"log"
 	"math/rand"
 	"time"
+	"os"
+	"strconv"
 )
 
 func main() {
+
+    var arg string = os.Args[1]
+
+    channel, err := strconv.ParseInt(arg, 10, 8)
+
+    //log.Println(lor.Unit(channel))
+
 	// Open the serial port used for communications with the unit
 	port, err := serial.OpenPort(&serial.Config{
 		Name: "/dev/ttyUSB0",
 		Baud: 19200,
 	})
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -21,7 +31,9 @@ func main() {
 	var cont = lor.NewController(0x01, port)
 
 	// Write an initial connection heartbeat
-	_, _ = cont.Heartbeat()
+	// _, _ = cont.Heartbeat()
+
+	_, _ = cont.On(lor.Channel(channel));
 
 	log.Println("Connected to LOR unit!")
 
