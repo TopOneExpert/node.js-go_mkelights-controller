@@ -15,7 +15,7 @@ ioClient.on('connect', function(data) {
 
 ioClient.on('response on', function (msg) {
     console.log('light on ' + msg + ' from server');
-    exec('./LORtest ' +msg, (err, stdout, stderr) => {
+    exec('./LORController ' +msg, (err, stdout, stderr) => {
         if (err) {
             //some err occurred
             console.error(err);
@@ -29,12 +29,12 @@ ioClient.on('response on', function (msg) {
 
 ioClient.on('response off', function (msg) {
     console.log('light off ' + msg + ' from server');
-    exec('ps aux | grep "LORtest ' + msg + '"', (err, stdout, stderr) => {
+    exec('ps aux | grep "LORController ' + msg + '"', (err, stdout, stderr) => {
         if (err) {
             console.error(err)
         } else {
-            // console.log(`stdout: ${stdout}`);
-            // console.log(`stderr: ${stderr}`);
+            console.log(`stdout: ${stdout}`);
+            console.log(`stderr: ${stderr}`);
             let process_arr = stdout.split(/\r?\n/);
             process_arr.forEach(function(item) {
                 let p_infos = item.split(/\s+/);
