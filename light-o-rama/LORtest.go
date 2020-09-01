@@ -35,9 +35,9 @@ func main() {
 	var cont = lor.NewController(0x01, port)
 
 	// Write an initial connection heartbeat
-	// _, _ = cont.Heartbeat()
+    _, _ = cont.Heartbeat()
 
-	_, _ = cont.On(lor.Channel(channel));
+	//_, _ = cont.On(lor.Channel(channel));
 
 	log.Println("Connected to LOR unit!")
 
@@ -48,8 +48,9 @@ func main() {
 		}
 
 		// Constantly randomize the brightness of channel 1
-		if _, err := cont.SetBrightness(0, rand.Float64()); err != nil {
-			log.Fatal("Failed to set brightness!")
+		//if _, err := cont.SetBrightness(0, rand.Float64()); err != nil {
+		if _, err := cont.On(lor.Channel(channel)); err != nil {
+			log.Fatal("Failed to set on!")
 		}
 
 		//cont.SetEffect(0, );

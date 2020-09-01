@@ -18,7 +18,7 @@ ioClient.on('response on', function (msg) {
     exec('./LORtest ' +msg, (err, stdout, stderr) => {
         if (err) {
             //some err occurred
-            console.error(err)
+            console.error(err);
         } else {
             // the *entire* stdout and stderr (buffered)
             console.log(`stdout: ${stdout}`);
@@ -27,6 +27,27 @@ ioClient.on('response on', function (msg) {
     });
 });
 
-ioClient.off('response off', function (msg) {
+ioClient.on('response off', function (msg) {
     console.log('light off ' + msg + ' from server');
+    exec('ps aux | grep "LORtest ' + msg + '"', (err, stdout, stderr) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // console.log(`stdout: ${stdout}`);
+            // console.log(`stderr: ${stderr}`);
+            let process_arr = stdout.split(/\r?\n/);
+            process_arr.forEach(function(item) {
+                let p_infos = item.split(/\s+/);
+                console.log(`pid: ${p_infos[1]}`);
+                exec('kill ' + p_infos[1], (err, stdout, stderr) => {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        console.log(`stdout: ${stdout}`);
+                        console.log(`stderr: ${stderr}`);
+                    }
+                });
+            });
+        }
+    })
 });
