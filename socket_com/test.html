@@ -38,13 +38,11 @@
 
     $('#light_on').click(function(){
         socket.emit('light_on', $('#channel').val());
-        $('#messages').append($('<li>').text($('#channel').val()));
         return false;
     });
 
     $('#light_off').click(function(){
         socket.emit('light_off', $('#channel').val());
-        $('#messages').append($('<li>').text($('#channel').val()));
         return false;
     })
 

@@ -15,13 +15,13 @@ io.on('connection', function(socket){
 
     socket.on('light_on', function(msg){
         console.log('light_on: ' + msg);
-        socket.emit('response on', msg);
+        socket.emit('response message', msg);
         socket.broadcast.emit('response on', msg);
     });
 
     socket.on('light_off', function(msg){
         console.log('light_off: ' + msg);
-        socket.emit('response off', msg);
+        socket.emit('response message', msg);
         socket.broadcast.emit('response off', msg);
     });
 });
