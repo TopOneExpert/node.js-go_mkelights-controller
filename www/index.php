@@ -8,7 +8,7 @@ session_start();
 
 header("Expires: Tue, 28 Aug 2007 12:34:56 GMT ");
 
-require_once 'includes/controller.php';
+//require_once 'includes/controller.php';
 
 ?>
 <!DOCTYPE html>
