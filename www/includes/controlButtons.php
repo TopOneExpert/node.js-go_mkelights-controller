@@ -235,7 +235,7 @@
 
 <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
 <script>
-	var socket = io.connect( 'http://localhost:8080' );
+	var socket = io.connect( 'https://3.20.78.29:8080' );
 	var controlStatusElement = $('.control-status');
 
 	socket.on('connect', function(data) {
