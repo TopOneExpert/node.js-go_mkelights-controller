@@ -37,7 +37,7 @@
 					</div>
 					<div class="control-button-title">Snowman</div>
 					<div class="control-button control-button-off">
-						<a href="#" id="cb3_off" data-command-name="B5" data-command-value="0" onclick="handleLight('03', 'on')">Off</a>
+						<a href="#" id="cb3_off" data-command-name="B5" data-command-value="0" onclick="handleLight('03', 'off')">Off</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -161,7 +161,7 @@
 					</div>
 					<div class="control-button-title">Door Trees</div>
 					<div class="control-button control-button-off">
-						<a href="#" id="cb5_off" data-command-name="B8" data-command-value="0" onclick="handleLight('12', 'on')">Off</a>
+						<a href="#" id="cb5_off" data-command-name="B8" data-command-value="0" onclick="handleLight('12', 'off')">Off</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -235,11 +235,11 @@
 
 <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
 <script>
-	var socket = io.connect( 'https://3.20.78.29:8080' );
+	var socket = io.connect( 'https://mkelights.com:8080/' );
 	var controlStatusElement = $('.control-status');
 
 	socket.on('connect', function(data) {
-		socket.emit('joined', 'Hello World from client');
+		socket.emit('joined', 'Hello client from site');
 	});
 
     socket.on('acknowledge', function(data) {

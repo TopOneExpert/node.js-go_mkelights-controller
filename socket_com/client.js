@@ -1,12 +1,13 @@
 const
     io = require("socket.io-client"),
-    ioClient = io.connect("https://3.20.78.29:8080");
+    ioClient = io.connect("https://mkelights.com:8080/");
 
 const { exec } = require('child_process');
 
 // ioClient.on("seq-num", (msg) => console.info(msg));
-ioClient.on('connect', function(data) {
-    ioClient.emit('joined', 'Hello World from client');
+ioClient.on('connect', function(msg) {
+    console.log('connect from server:');
+    ioClient.emit('joined', 'Hello client from device');
 });
 
 // ioClient.on('acknowledge', function(data) {
