@@ -18,7 +18,7 @@ server.listen(8080);
 
 io.on('connection', function (socket) {
 
-    socket.on('joined', function (data) {
+    socket.on('joined', function (msg) {
         console.log('connected: ', msg);
         socket.emit('acknowledge', 'Connected');
     });
