@@ -26,37 +26,43 @@ io.on('connection', function (socket) {
         socket.emit('response wait', 'Wait...');
         console.log('light_on', msg);
 
+        var intervalId = null;
         var seconds = 0;
-        function incrementSeconds() {
-            seconds += 1;
+
+        function incrementSeconds() {            
             if (seconds === 5) {
                 console.log('light_on', msg, 'Ready');
                 socket.emit('response ready', 'Ready');
                 socket.broadcast.emit('response on', msg);
+                clearInterval(intervalId);
             } else {
                 console.log("light on", msg, "Wait");
-                socket.emit('response wait', 'Wait... ' + seconds + "s");
+                socket.emit('response wait', 'Wait... ' + (5 - seconds) + "s");
             }
+            seconds += 1;
         }
-        var cancel = setInterval(incrementSeconds, 1000);
+        intervalId = setInterval(incrementSeconds, 1000);
     });
 
     socket.on('light_off', function (msg) {
         socket.emit('response wait', 'Wait...');
         console.log('light_off', msg);
 
+        var intervalId = null;
         var seconds = 0;
-        function incrementSeconds() {
-            seconds += 1;
+
+        function incrementSeconds() {            
             if (seconds === 5) {
                 console.log('light_off', msg, 'Ready');
                 socket.emit('response ready', 'Ready');
                 socket.broadcast.emit('response off', msg);
+                clearInterval(intervalId);
             } else {
                 console.log("light off", msg, "Wait");
-                socket.emit('response wait', 'Wait... ' + seconds + "s");
+                socket.emit('response wait', 'Wait... ' + (5 - seconds) + "s");
             }
+            seconds += 1;
         }
-        var cancel = setInterval(incrementSeconds, 1000);
+        intervalId = setInterval(incrementSeconds, 1000);
     });
 });
