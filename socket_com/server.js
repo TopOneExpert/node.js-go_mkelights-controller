@@ -15,7 +15,6 @@ var io = require("socket.io").listen(server);
 
 server.listen(8080);
 
-
 io.on('connection', function (socket) {
 
     socket.on('joined', function (msg) {
@@ -34,6 +33,9 @@ io.on('connection', function (socket) {
                 console.log('light_on', msg, 'Ready');
                 socket.emit('response ready', 'Ready');
                 socket.broadcast.emit('response on', msg);
+            } else {
+                console.log("light on", msg, "Wait");
+                socket.emit('response wait', 'Wait... ' + seconds + "s");
             }
         }
         var cancel = setInterval(incrementSeconds, 1000);
@@ -50,6 +52,9 @@ io.on('connection', function (socket) {
                 console.log('light_off', msg, 'Ready');
                 socket.emit('response ready', 'Ready');
                 socket.broadcast.emit('response off', msg);
+            } else {
+                console.log("light off", msg, "Wait");
+                socket.emit('response wait', 'Wait... ' + seconds + "s");
             }
         }
         var cancel = setInterval(incrementSeconds, 1000);
