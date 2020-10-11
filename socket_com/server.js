@@ -74,7 +74,7 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('all light on', msg);
     });
 
-    socket.off('all_light_off', function (msg) {
+    socket.on('all_light_off', function (msg) {
         console.log('all_light_off', msg);
         socket.broadcast.emit('all light off', msg);
     });
