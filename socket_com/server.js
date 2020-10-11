@@ -6,11 +6,14 @@ app.get('/', function(req, res){
     res.send("test");
 });
 
-var server = require("https").createServer({
-    key: fs.readFileSync('privkey.pem'),
-    cert: fs.readFileSync('cert.pem')
-}, app);
+// var server = require("https").createServer({
+//     key: fs.readFileSync('privkey.pem'),
+//     cert: fs.readFileSync('cert.pem')
+// }, app);
 
+// var io = require("socket.io").listen(server);
+
+var server = require("http").createServer(app);
 var io = require("socket.io").listen(server);
 
 server.listen(8080);
@@ -64,5 +67,15 @@ io.on('connection', function (socket) {
             seconds += 1;
         }
         intervalId = setInterval(incrementSeconds, 1000);
+    });
+
+    socket.on('all_light_on', function (msg) {
+        console.log('all_light_on', msg);
+        socket.broadcast.emit('all light on', msg);
+    });
+
+    socket.off('all_light_off', function (msg) {
+        console.log('all_light_off', msg);
+        socket.broadcast.emit('all light off', msg);
     });
 });
