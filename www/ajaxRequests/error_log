@@ -1,1 +1,0 @@
-[16-Dec-2017 19:23:06 CST6CDT] PHP Warning:  mysqli_error() expects exactly 1 parameter, 0 given in /home/lights/public_html/ajaxRequests/cmd_ajax.php on line 78
